@@ -4,6 +4,7 @@ import com.appwarehaus.entity.Category;
 import com.appwarehaus.payload.CategoryDto;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class CategoryService {
 
-    @Autowired
     CategoryRepository categoryRepository;
 
     public Result addCategory(CategoryDto categoryDto) {

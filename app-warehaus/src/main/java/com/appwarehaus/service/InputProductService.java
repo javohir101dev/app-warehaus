@@ -29,7 +29,7 @@ public class InputProductService {
 
     public Result addInputProduct(InputProductDto inputProductDto){
         if (Utils.isEmptry(inputProductDto)){
-            return new Result("Request body should not be emptry", false);
+            return new Result("Request body should not be empty", false);
         }
         Optional<Product> optionalProduct = productRepo.findById(inputProductDto.getProductId());
         if (!optionalProduct.isPresent()){
@@ -70,7 +70,7 @@ public class InputProductService {
 
     public Result editInputProduct(Integer id, InputProductDto inputProductDto){
         if (Utils.isEmptry(inputProductDto)){
-            return new Result("Request body should not be emptry", false);
+            return new Result("Request body should not be empty", false);
         }
         Optional<InputProduct> optionalInputProduct = inputProductRepo.findById(id);
         if (!optionalInputProduct.isPresent()){
@@ -109,8 +109,5 @@ public class InputProductService {
             return new Result("Error in deleting InputProduct", false);
         }
     }
-
-
-
 
 }

@@ -18,45 +18,42 @@ public class CurrencyService {
     public Result addCurrency(CurrencyDto currencyDto){
         boolean exists = currencyRepo.existsByName(currencyDto.getName());
         if (exists){
-            return new Result("This currency is registred already", false);
+            return new Result("This currency is registered already", false);
         }
         Currency currency = new Currency();
         currency.setName(currencyDto.getName());
         currencyRepo.save(currency);
-        return new Result(" Currency is added", true);
+        return new Result("Currency is added", true);
     }
 
-    public List<Currency> getAllCurrencys(){
+    public List<Currency> getAllCurrencies(){
         return currencyRepo.findAll();
     }
 
     public Currency getCurrencyById(Integer id){
         Optional<Currency> optionalCurrency = currencyRepo.findById(id);
-        if (!optionalCurrency.isPresent()){
-            return new Currency();
-        }
-        return optionalCurrency.get();
+        return optionalCurrency.orElseGet(Currency::new);
     }
 
     public Result editCurrencyById(Integer id, CurrencyDto currencyDto){
         Optional<Currency> optionalCurrency = currencyRepo.findById(id);
         if (!optionalCurrency.isPresent()){
-            return new Result(" Currency is not found", false);
+            return new Result("Currency is not found", false);
         }
         boolean exists = currencyRepo.existsByName(currencyDto.getName());
         if (exists){
-            return new Result("This currency is registred already", false);
+            return new Result("This currency is registered already", false);
         }
         Currency currency = optionalCurrency.get();
         currency.setName(currencyDto.getName());
         currencyRepo.save(currency);
-        return new Result(" Currency is edited", true);
+        return new Result("Currency is edited", true);
     }
 
     public Result deleteCurrencyById(Integer id){
         Optional<Currency> optionalCurrency = currencyRepo.findById(id);
         if (!optionalCurrency.isPresent()){
-            return new Result(" Currency is not found", false);
+            return new Result("Currency is not found", false);
         }
         try {
             currencyRepo.deleteById(id);

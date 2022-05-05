@@ -1,10 +1,12 @@
 package com.appwarehaus.repository;
 
 import com.appwarehaus.entity.User;
+import com.appwarehaus.entity.Warehaus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserRepo extends JpaRepository<User, Integer> {
     boolean existsByPhoneNumber(String phoneNumber);
@@ -15,6 +17,6 @@ public interface UserRepo extends JpaRepository<User, Integer> {
     @Query(nativeQuery = true, value = "select * from users\n" +
             "join users_warehaus uw on users.id = uw.users_id\n" +
             "where uw.warehaus_id=:warehausId")
-    List<User> findByWarehausId(Integer warehausId);
+    List<User> findByWarehouseId(Integer warehausId);
 
 }

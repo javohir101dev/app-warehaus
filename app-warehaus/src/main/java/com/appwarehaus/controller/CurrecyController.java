@@ -22,7 +22,7 @@ public class CurrecyController {
 
     @GetMapping
     public List<Currency> getAllCurrencys(){
-        return currencyService.getAllCurrencys();
+        return currencyService.getAllCurrencies();
     }
 
     @GetMapping("/{id}")

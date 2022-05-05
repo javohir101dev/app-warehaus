@@ -27,7 +27,7 @@ public class UserService {
 
     public Result addUser(UserDto userDto){
         if (Utils.isEmptry(userDto)){
-            return new Result("Request body should not be emptry", false);
+            return new Result("Request body should not be empty", false);
         }
         boolean exists = userRepo.existsByPhoneNumber(userDto.getPhoneNumber());
         if (exists){
@@ -35,7 +35,7 @@ public class UserService {
         }
 
         if (Utils.isEmptry(userDto.getWarehausIds())){
-            return new Result("Werehaus name should not be emptry", false);
+            return new Result("Warehouse name should not be empty", false);
         }
 
         Set<Integer> setWerehausIds = userDto.getWarehausIds();
@@ -43,7 +43,7 @@ public class UserService {
         for (Integer werehausId : setWerehausIds) {
             Optional<Warehaus> optionalWarehaus = warehausRepo.findById(werehausId);
             if (!optionalWarehaus.isPresent()){
-                return new Result("Werehaus is not found", false);
+                return new Result("Warehouse is not found", false);
             }
             warehausSet.add(optionalWarehaus.get());
         }
@@ -72,14 +72,11 @@ public class UserService {
 
     public User getUserById(Integer id){
         Optional<User> optionalUser = userRepo.findById(id);
-        if (!optionalUser.isPresent()){
-            return null;
-        }
-        return optionalUser.get();
+        return optionalUser.orElse(null);
     }
 
-    public List<User> getUserByWarehausId(Integer warehausId){
-        return userRepo.findByWarehausId(warehausId);
+    public List<User> getUserByWarehouseId(Integer warehausId){
+        return userRepo.findByWarehouseId(warehausId);
     }
 
     public Result editUserById(Integer id, UserDto userDto){
@@ -133,6 +130,5 @@ public class UserService {
             return new Result("Error in deleting", false);
         }
     }
-
 
 }

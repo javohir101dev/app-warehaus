@@ -39,7 +39,7 @@ public class UserController {
 
     @GetMapping("/byWarehausId/{warehausId}")
     public List<User> getUsersByWarehausId(@PathVariable Integer warehausId){
-        return userService.getUserByWarehausId(warehausId);
+        return userService.getUserByWarehouseId(warehausId);
     }
 
     @PutMapping("/{id}")

@@ -5,6 +5,7 @@ import com.appwarehaus.payload.ClientDto;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.repository.CategoryRepository;
 import com.appwarehaus.repository.ClientRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ClientService {
-    @Autowired
+
     ClientRepo clientRepo;
 
     public Result addClient(ClientDto clientDto){
@@ -34,10 +36,7 @@ public class ClientService {
 
     public Client getClientById(Integer id){
         Optional<Client> optionalClient = clientRepo.findById(id);
-        if (!optionalClient.isPresent()){
-            return new Client();
-        }
-        return optionalClient.get();
+        return optionalClient.orElseGet(Client::new);
     }
 
     public Result editClientById(Integer id, ClientDto clientDto){
