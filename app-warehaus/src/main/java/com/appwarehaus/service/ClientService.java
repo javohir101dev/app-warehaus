@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ClientService {
 
-    ClientRepo clientRepo;
+    private final ClientRepo clientRepo;
 
     public Result addClient(ClientDto clientDto){
         boolean exists = clientRepo.existsByPhoneNumber(clientDto.getPhoneNumber());

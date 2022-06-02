@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CategoryService {
 
-    CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public Result addCategory(CategoryDto categoryDto) {
         Category category = new Category();
