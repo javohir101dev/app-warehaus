@@ -19,8 +19,4 @@ public class Supplier extends AbstractEntity {
     @Column(unique = true)
     private String phoneNumber;
 
-
-
-
-
 }

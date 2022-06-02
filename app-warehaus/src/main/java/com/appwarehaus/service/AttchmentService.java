@@ -40,12 +40,13 @@ public class AttchmentService {
         return new Result("File is saved", true, savedAttachment.getId());
     }
 
-    public Attachment getAttachmentById(Integer id) {
-        Optional<Attachment> optionalAttachment = attachmentRepository.findById(id);
-        if (!optionalAttachment.isPresent()) {
-            return new Attachment();
+    public AttachmentContent getAttachmentById(Integer id) {
+        Optional<AttachmentContent> byId = attachmentContentRepository.findById(id);
+        if (!byId.isPresent()) {
+            return new AttachmentContent();
         }
-        return optionalAttachment.get();
+        byte[] bytes = byId.get().getBytes();
+        return null;
     }
 
     @SneakyThrows
