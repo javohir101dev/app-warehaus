@@ -9,5 +9,5 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
-public class Warehaus extends AbstractEntity {
+public class Warehouse extends AbstractEntity {
 }

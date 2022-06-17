@@ -1,7 +1,7 @@
 package com.appwarehaus.service;
 
 import com.appwarehaus.entity.User;
-import com.appwarehaus.entity.Warehaus;
+import com.appwarehaus.entity.Warehouse;
 import com.appwarehaus.helper.Utils;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.payload.UserDto;
@@ -39,13 +39,13 @@ public class UserService {
         }
 
         Set<Integer> setWerehausIds = userDto.getWarehausIds();
-        Set<Warehaus> warehausSet = new HashSet<>();
+        Set<Warehouse> warehouseSet = new HashSet<>();
         for (Integer werehausId : setWerehausIds) {
-            Optional<Warehaus> optionalWarehaus = warehausRepo.findById(werehausId);
+            Optional<Warehouse> optionalWarehaus = warehausRepo.findById(werehausId);
             if (!optionalWarehaus.isPresent()){
                 return new Result("Warehouse is not found", false);
             }
-            warehausSet.add(optionalWarehaus.get());
+            warehouseSet.add(optionalWarehaus.get());
         }
 
 
@@ -55,7 +55,7 @@ public class UserService {
         user.setLastName(userDto.getLastName());
         user.setPhoneNumber(userDto.getPhoneNumber());
         user.setPassword(userDto.getPassword());
-        user.setWarehaus(warehausSet);
+        user.setWarehaus(warehouseSet);
         String code = "1";
         if (!Utils.isEmptry(userRepo.lastId())){
             code = "" + (userRepo.lastId()+1);
@@ -97,13 +97,13 @@ public class UserService {
         }
 
         Set<Integer> setWerehausIds = userDto.getWarehausIds();
-        Set<Warehaus> warehausSet = new HashSet<>();
+        Set<Warehouse> warehouseSet = new HashSet<>();
         for (Integer werehausId : setWerehausIds) {
-            Optional<Warehaus> optionalWarehaus = warehausRepo.findById(werehausId);
+            Optional<Warehouse> optionalWarehaus = warehausRepo.findById(werehausId);
             if (!optionalWarehaus.isPresent()){
                 return new Result("Werehaus is not found", false);
             }
-            warehausSet.add(optionalWarehaus.get());
+            warehouseSet.add(optionalWarehaus.get());
         }
 
 
@@ -113,7 +113,7 @@ public class UserService {
         user.setLastName(userDto.getLastName());
         user.setPhoneNumber(userDto.getPhoneNumber());
         user.setPassword(userDto.getPassword());
-        user.setWarehaus(warehausSet);
+        user.setWarehaus(warehouseSet);
         userRepo.save(user);
         return new Result("User is edited", true);
     }

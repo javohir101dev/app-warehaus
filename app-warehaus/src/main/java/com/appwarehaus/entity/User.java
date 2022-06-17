@@ -34,5 +34,5 @@ public class User {
     private boolean active = true;
 
     @ManyToMany
-    private Set<Warehaus> warehaus;
+    private Set<Warehouse> warehaus;
 }

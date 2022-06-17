@@ -1,6 +1,6 @@
 package com.appwarehaus.service;
 
-import com.appwarehaus.entity.Warehaus;
+import com.appwarehaus.entity.Warehouse;
 import com.appwarehaus.payload.WarehausDto;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.repository.WarehausRepo;
@@ -20,26 +20,26 @@ public class WarehausService {
         if (exists){
             return new Result("This warehaus is registred already", false);
         }
-        Warehaus warehaus = new Warehaus();
-        warehaus.setName(warehausDto.getName());
-        warehausRepo.save(warehaus);
+        Warehouse warehouse = new Warehouse();
+        warehouse.setName(warehausDto.getName());
+        warehausRepo.save(warehouse);
         return new Result(" Warehaus is added", true);
     }
 
-    public List<Warehaus> getAllWarehauss(){
+    public List<Warehouse> getAllWarehauss(){
         return warehausRepo.findAll();
     }
 
-    public Warehaus getWarehausById(Integer id){
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(id);
+    public Warehouse getWarehausById(Integer id){
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(id);
         if (!optionalWarehaus.isPresent()){
-            return new Warehaus();
+            return new Warehouse();
         }
         return optionalWarehaus.get();
     }
 
     public Result editWarehausById(Integer id, WarehausDto warehausDto){
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(id);
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(id);
         if (!optionalWarehaus.isPresent()){
             return new Result("Warehaus is not found", false);
         }
@@ -47,14 +47,14 @@ public class WarehausService {
         if (exists){
             return new Result("This warehaus is registred already", false);
         }
-        Warehaus warehaus = optionalWarehaus.get();
-        warehaus.setName(warehausDto.getName());
-        warehausRepo.save(warehaus);
+        Warehouse warehouse = optionalWarehaus.get();
+        warehouse.setName(warehausDto.getName());
+        warehausRepo.save(warehouse);
         return new Result(" Warehaus is edited", true);
     }
 
     public Result deleteWarehausById(Integer id){
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(id);
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(id);
         if (!optionalWarehaus.isPresent()){
             return new Result(" Warehaus is not found", false);
         }

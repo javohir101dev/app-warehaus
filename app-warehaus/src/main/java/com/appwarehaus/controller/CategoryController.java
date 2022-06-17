@@ -31,7 +31,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public Result ediyCAtegoryById(@PathVariable Integer id, @RequestBody CategoryDto categoryDto){
+    public Result editCategoryById(@PathVariable Integer id, @RequestBody CategoryDto categoryDto){
         return categoryService.editCategoryById(id, categoryDto);
     }
 

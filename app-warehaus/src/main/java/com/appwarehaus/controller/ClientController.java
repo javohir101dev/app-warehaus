@@ -4,6 +4,7 @@ import com.appwarehaus.entity.Client;
 import com.appwarehaus.payload.ClientDto;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.service.ClientService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/client")
+@RequiredArgsConstructor
 public class ClientController {
-    @Autowired
-    ClientService clientService;
+
+    private final ClientService clientService;
 
     @PostMapping
     public Result addClient(@RequestBody ClientDto clientDto){
@@ -26,12 +28,12 @@ public class ClientController {
     }
 
     @GetMapping("/{id}")
-    public Client getClientBuId(@PathVariable Integer id){
+    public Client getClientById(@PathVariable Integer id){
         return clientService.getClientById(id);
     }
 
     @PutMapping("/{id}")
-    public Result editClientBuId(@PathVariable Integer id, @RequestBody ClientDto clientDto){
+    public Result editClientById(@PathVariable Integer id, @RequestBody ClientDto clientDto){
         return clientService.editClientById(id, clientDto);
     }
 

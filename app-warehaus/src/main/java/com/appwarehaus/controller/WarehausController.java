@@ -1,6 +1,6 @@
 package com.appwarehaus.controller;
 
-import com.appwarehaus.entity.Warehaus;
+import com.appwarehaus.entity.Warehouse;
 import com.appwarehaus.payload.WarehausDto;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.service.WarehausService;
@@ -21,12 +21,12 @@ public class WarehausController {
     }
 
     @GetMapping
-    public List<Warehaus> getAllWarehauss(){
+    public List<Warehouse> getAllWarehauss(){
         return warehausService.getAllWarehauss();
     }
 
     @GetMapping("/{id}")
-    public Warehaus getWarehausBuId(@PathVariable Integer id){
+    public Warehouse getWarehausBuId(@PathVariable Integer id){
         return warehausService.getWarehausById(id);
     }
 

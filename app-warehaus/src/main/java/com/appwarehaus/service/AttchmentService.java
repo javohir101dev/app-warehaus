@@ -27,6 +27,7 @@ public class AttchmentService {
     public Result uploadFile(MultipartHttpServletRequest request) {
         Iterator<String> fileNames = request.getFileNames();
         MultipartFile file = request.getFile(fileNames.next());
+
         Attachment attachment = new Attachment();
         attachment.setName(file.getOriginalFilename());
         attachment.setSize(file.getSize());

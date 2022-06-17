@@ -21,7 +21,7 @@ public class Input {
     private Timestamp date;
 
     @ManyToOne
-    private Warehaus warehaus;
+    private Warehouse warehouse;
 
     @ManyToOne
     private Supplier supplier;

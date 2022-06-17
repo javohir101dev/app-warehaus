@@ -14,7 +14,7 @@ public interface OutputRepo extends JpaRepository<Output, Integer> {
     @Query(nativeQuery = true, value = "select max(id) from output")
     Integer getLastId();
 
-    List<Output> findAllByWarehausId(Integer warehaus_id);
+    List<Output> findAllByWarehouseId(Integer warehouse_id);
 
     List<Output> findAllByClientId(Integer client_id);
 

@@ -3,9 +3,11 @@ package com.appwarehaus.repository;
 import com.appwarehaus.entity.Input;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface InputRepo extends JpaRepository<Input, Integer> {
 
     boolean existsByFactureNumber(String factureNumber);
@@ -13,7 +15,7 @@ public interface InputRepo extends JpaRepository<Input, Integer> {
     @Query(nativeQuery = true, value = "select max(id) from input")
     Integer getLastId();
 
-    List<Input> findAllByWarehausId(Integer warehaus_id);
+    List<Input> findAllByWarehouseId(Integer warehouse_id);
 
     List<Input> findAllBySupplierId(Integer supplier_id);
 

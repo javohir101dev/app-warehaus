@@ -3,7 +3,7 @@ package com.appwarehaus.service;
 import com.appwarehaus.entity.Currency;
 import com.appwarehaus.entity.Output;
 import com.appwarehaus.entity.Client;
-import com.appwarehaus.entity.Warehaus;
+import com.appwarehaus.entity.Warehouse;
 import com.appwarehaus.helper.Utils;
 import com.appwarehaus.payload.OutputDto;
 import com.appwarehaus.payload.Result;
@@ -45,7 +45,7 @@ public class OutputService {
         if (exists){
             return new Result("Output with this factory number is exists", false);
         }
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(outputDto.getWarehausId());
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(outputDto.getWarehausId());
         if (!optionalWarehaus.isPresent()){
             return new Result("Warehaus is not found", false);
         }
@@ -61,7 +61,7 @@ public class OutputService {
         Output output = new Output();
         output.setName(outputDto.getName());
         output.setDate(Timestamp.valueOf(LocalDateTime.now()));
-        output.setWarehaus(optionalWarehaus.get());
+        output.setWarehouse(optionalWarehaus.get());
         output.setClient(optionalClient.get());
         output.setCurrency(optionalCurrency.get());
         output.setFactureNumber(outputDto.getFactureNumber());
@@ -83,7 +83,7 @@ public class OutputService {
     }
 
     public List<Output> getOutputsByWarehausId(Integer warehausId){
-        return outputRepo.findAllByWarehausId(warehausId);
+        return outputRepo.findAllByWarehouseId(warehausId);
     }
 
     public List<Output> getOutputsByClientId(Integer supplierId){
@@ -116,7 +116,7 @@ public class OutputService {
             return new Result("Output with  factory number is exists", false);
         }
 
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(outputDto.getWarehausId());
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(outputDto.getWarehausId());
         if (!optionalWarehaus.isPresent()){
             return new Result("Warehaus is not found", false);
         }
@@ -131,7 +131,7 @@ public class OutputService {
 
         Output output = optionalOutput.get();
         output.setName(outputDto.getName());
-        output.setWarehaus(optionalWarehaus.get());
+        output.setWarehouse(optionalWarehaus.get());
         output.setClient(optionalClient.get());
         output.setCurrency(optionalCurrency.get());
         output.setFactureNumber(outputDto.getFactureNumber());

@@ -4,6 +4,7 @@ import com.appwarehaus.entity.Input;
 import com.appwarehaus.payload.InputDto;
 import com.appwarehaus.payload.Result;
 import com.appwarehaus.service.InputService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,13 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/input")
+@RequiredArgsConstructor
 public class InputController {
 
     private final InputService inputService;
-
-    public InputController(InputService inputService) {
-        this.inputService = inputService;
-    }
 
     @PostMapping
     public Result addInput(@RequestBody InputDto inputDto){
@@ -31,7 +29,7 @@ public class InputController {
 
     @GetMapping("/byWarehausId/{warehausId}")
     public List<Input> getAllInputsByWarehausId(@PathVariable Integer warehausId){
-        return inputService.getInputsByWarehausId(warehausId);
+        return inputService.getInputsByWarehouseId(warehausId);
     }
 
     @GetMapping("/byCode/{code}")

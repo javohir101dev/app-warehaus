@@ -3,7 +3,7 @@ package com.appwarehaus.service;
 import com.appwarehaus.entity.Currency;
 import com.appwarehaus.entity.Input;
 import com.appwarehaus.entity.Supplier;
-import com.appwarehaus.entity.Warehaus;
+import com.appwarehaus.entity.Warehouse;
 import com.appwarehaus.helper.Utils;
 import com.appwarehaus.payload.InputDto;
 import com.appwarehaus.payload.Result;
@@ -11,6 +11,7 @@ import com.appwarehaus.repository.CurrencyRepo;
 import com.appwarehaus.repository.InputRepo;
 import com.appwarehaus.repository.SupplierRepo;
 import com.appwarehaus.repository.WarehausRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class InputService {
 
     private final InputRepo inputRepo;
@@ -29,13 +31,13 @@ public class InputService {
 
 
 
-    @Autowired
-    public InputService(InputRepo inputRepo, WarehausRepo warehausRepo, SupplierRepo supplierRepo, CurrencyRepo currencyRepo) {
-        this.inputRepo = inputRepo;
-        this.warehausRepo = warehausRepo;
-        this.supplierRepo = supplierRepo;
-        this.currencyRepo = currencyRepo;
-    }
+//    @Autowired
+//    public InputService(InputRepo inputRepo, WarehausRepo warehausRepo, SupplierRepo supplierRepo, CurrencyRepo currencyRepo) {
+//        this.inputRepo = inputRepo;
+//        this.warehausRepo = warehausRepo;
+//        this.supplierRepo = supplierRepo;
+//        this.currencyRepo = currencyRepo;
+//    }
 
     public Result addInput(InputDto inputDto){
         if (Utils.isEmptry(inputDto)){
@@ -45,7 +47,7 @@ public class InputService {
         if (exists){
             return new Result("Input with this factory number is exist", false);
         }
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(inputDto.getWarehausId());
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(inputDto.getWarehausId());
         if (!optionalWarehaus.isPresent()){
             return new Result("Warehaus is not found", false);
         }
@@ -61,7 +63,7 @@ public class InputService {
         Input input = new Input();
         input.setName(inputDto.getName());
         input.setDate(Timestamp.valueOf(LocalDateTime.now()));
-        input.setWarehaus(optionalWarehaus.get());
+        input.setWarehouse(optionalWarehaus.get());
         input.setSupplier(optionalSupplier.get());
         input.setCurrency(optionalCurrency.get());
         input.setFactureNumber(inputDto.getFactureNumber());
@@ -82,8 +84,8 @@ public class InputService {
         return inputRepo.findAll();
     }
 
-    public List<Input> getInputsByWarehausId(Integer warehausId){
-        return inputRepo.findAllByWarehausId(warehausId);
+    public List<Input> getInputsByWarehouseId(Integer warehausId){
+        return inputRepo.findAllByWarehouseId(warehausId);
     }
 
     public List<Input> getInputsBySupplierId(Integer supplierId){
@@ -119,7 +121,7 @@ public class InputService {
             return new Result("Input with  factory nuber is exist", false);
         }
 
-        Optional<Warehaus> optionalWarehaus = warehausRepo.findById(inputDto.getWarehausId());
+        Optional<Warehouse> optionalWarehaus = warehausRepo.findById(inputDto.getWarehausId());
         if (!optionalWarehaus.isPresent()){
             return new Result("Warehaus is not found", false);
         }
@@ -134,7 +136,7 @@ public class InputService {
 
         Input input = optionalInput.get();
         input.setName(inputDto.getName());
-        input.setWarehaus(optionalWarehaus.get());
+        input.setWarehouse(optionalWarehaus.get());
         input.setSupplier(optionalSupplier.get());
         input.setCurrency(optionalCurrency.get());
         input.setFactureNumber(inputDto.getFactureNumber());

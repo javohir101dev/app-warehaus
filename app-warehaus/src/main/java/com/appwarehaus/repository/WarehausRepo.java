@@ -1,8 +1,8 @@
 package com.appwarehaus.repository;
 
-import com.appwarehaus.entity.Warehaus;
+import com.appwarehaus.entity.Warehouse;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface WarehausRepo extends JpaRepository<Warehaus, Integer> {
+public interface WarehausRepo extends JpaRepository<Warehouse, Integer> {
     boolean existsByName(String name);
 }

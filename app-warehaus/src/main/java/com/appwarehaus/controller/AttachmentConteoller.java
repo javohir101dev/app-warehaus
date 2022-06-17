@@ -21,7 +21,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class AttachmentConteoller {
 
-//    @Autowired
     private final AttchmentService attchmentService;
     private final AttachmentRepository attachmentRepository;
     private final AttachmentContentRepository attachmentContentRepository;
@@ -32,11 +31,13 @@ public class AttachmentConteoller {
         return attchmentService.uploadFile(request);
     }
 
-//    READ
-    @GetMapping("/{id}")
-    public AttachmentContent getAttachmentById(@PathVariable Integer id){
+//    READ INFO
+    @GetMapping("/info/{id}")
+    public AttachmentContent getAttachmentInfoById(@PathVariable Integer id){
         return attchmentService.getAttachmentById(id);
     }
+
+//    Download file photo
     @GetMapping("/download/{id}")
     public void downloadDBFileById(@PathVariable Integer id, HttpServletResponse response) throws IOException {
         Optional<Attachment> optionalAttachment = attachmentRepository.findById(id);
@@ -52,7 +53,7 @@ public class AttachmentConteoller {
 //                Fileni content typeni berish uchun
                 response.setContentType(attachment.getContentType());
 
-//                MAincontentni olib responsega yozish uchun
+//                Maincontentni olib responsega yozish uchun
                 FileCopyUtils.copy(attachmentContent.getBytes(), response.getOutputStream());
             }
         }

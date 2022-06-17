@@ -21,7 +21,7 @@ public class Output {
     private Timestamp date;
 
     @ManyToOne
-    private Warehaus warehaus;
+    private Warehouse warehouse;
 
     @ManyToOne
     private Client client;
